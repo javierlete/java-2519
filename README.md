@@ -6,5 +6,5 @@
 
 ## Ejercicios Java
 
-* https://puntocomnoesunlenguaje.blogspot.com/p/ejercicios.html
-  
+* Programación estructurada: https://puntocomnoesunlenguaje.blogspot.com/p/ejercicios.html
+* Programación Orientada a Objetos: https://puntocomnoesunlenguaje.blogspot.com/p/blog-page.html
