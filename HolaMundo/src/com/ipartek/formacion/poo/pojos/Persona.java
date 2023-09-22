@@ -68,6 +68,7 @@ public class Persona {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
+	// hashCode y equals
 	@Override
 	public int hashCode() {
 		return Objects.hash(fechaNacimiento, id, nombre);
@@ -86,6 +87,7 @@ public class Persona {
 				&& Objects.equals(nombre, other.nombre);
 	}
 
+	// toString
 	@Override
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + "]";
