@@ -12,7 +12,11 @@ public class PersonaPrueba {
 		
 		System.out.println(persona.getNombre());
 		
-		persona.setNombre("Javier");
+		try {
+			persona.setNombre("    ");
+		} catch (Exception e) {
+			System.out.println("No se ha podido cambiar el nombre");
+		}
 		
 		System.out.println(persona.getNombre());
 		
