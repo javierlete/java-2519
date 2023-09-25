@@ -13,17 +13,24 @@ public class LocalPrueba {
 		
 		local.entrar(persona1);
 		// local.entrar(null);
-		local.entrar(new Persona(2L, "Pepe Pérez", LocalDate.of(2005, 1, 2)));
+//		local.entrar(new Persona(2L, "Pepe Pérez", LocalDate.of(2010, 1, 2)));
 		
 		// local.salir(persona1);
 		// local.salir(new Persona(2L, "Pepe Pérez", LocalDate.of(2005, 1, 2)));
 
-		local.salir(2L);
+		local.salir(1L);
+		local.entrar(new Persona(3L, "Otro Otrez", LocalDate.of(2000, 1, 2)));
+		local.entrar(new Persona(4L, "Uno Masez", LocalDate.of(2000, 1, 2)));
+		
+		for(Persona persona: local.getPersonas()) {
+			persona.setNombre("Modificado Modificadez");
+			System.out.println(persona.getNombre());
+		}
 		
 		for(Persona persona: local.getPersonas()) {
 			System.out.println(persona.getNombre());
 		}
 		
-		System.out.println(local.getPersona(1L));
+//		System.out.println(local.getPersona(2L));
 	}
 }

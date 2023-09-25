@@ -40,8 +40,20 @@ public class Local {
 //		return persona;
 	}
 
-	public ArrayList<Persona> getPersonas() {
-		return personas;
+	public Iterable<Persona> getPersonas(String nombre) {
+		return personas.stream().filter(persona -> persona.getNombre().contains(nombre)).toList();
+	}
+
+	public Iterable<Persona> getPersonas() {
+		return new ArrayList<Persona>(personas);
+
+//		var al = new ArrayList<Persona>();
+//		
+//		for(Persona persona: personas) {
+//			al.add(new Persona(persona));
+//		}
+//		
+//		return al;
 	}
 
 	public int getCuantasPersonas() {
