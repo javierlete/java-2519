@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Adulto extends Persona {
-	public static final int MAYORIA_DE_EDAD = 18;
+	private static int mayoriaDeEdad = 18;
 	private String dni;
 	
 	public Adulto(Long id, String nombre, LocalDate fechaNacimiento, String dni) {
@@ -40,7 +40,7 @@ public class Adulto extends Persona {
 	
 	@Override
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
-		if(fechaNacimiento == null || fechaNacimiento.plusYears(MAYORIA_DE_EDAD).isAfter(LocalDate.now())) {
+		if(fechaNacimiento == null || fechaNacimiento.plusYears(getMayoriaDeEdad()).isAfter(LocalDate.now())) {
 			throw new RuntimeException("Debes dar la fecha de nacimiento y ser mayor de edad para ser adulto");
 		}
 		
@@ -49,6 +49,14 @@ public class Adulto extends Persona {
 
 	
 	
+	public static int getMayoriaDeEdad() {
+		return mayoriaDeEdad;
+	}
+
+	public static void setMayoriaDeEdad(int mayoriaDeEdad) {
+		Adulto.mayoriaDeEdad = mayoriaDeEdad;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

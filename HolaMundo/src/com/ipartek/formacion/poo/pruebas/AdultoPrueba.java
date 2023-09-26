@@ -6,8 +6,12 @@ import com.ipartek.formacion.poo.pojos.Adulto;
 import com.ipartek.formacion.poo.pojos.Local;
 import com.ipartek.formacion.poo.pojos.Persona;
 
+// java com.ipartek.formacion.poo.pruebas.AdultoPrueba 1 2 3
+// AdultoPrueba.main(new String[]{ 1, 2, 3 })
+
 public class AdultoPrueba {
 	public static void main(String[] args) {
+		
 		Adulto adulto = new Adulto("Uno", LocalDate.of(2000, 1, 2), "    12341235a      ");
 
 		System.out.println(adulto);
@@ -44,6 +48,7 @@ public class AdultoPrueba {
 		local.entrar(otraPersona);
 		local.entrar(adulto);
 		
+		Adulto.setMayoriaDeEdad(20);
 		Adulto nuevoAdulto = new Adulto(otraPersona, "12345678a");
 		
 		local.salir(otraPersona);
