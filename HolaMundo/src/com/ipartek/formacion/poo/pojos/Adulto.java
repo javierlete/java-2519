@@ -4,11 +4,16 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Adulto extends Persona {
+	public static final int MAYORIA_DE_EDAD = 18;
 	private String dni;
-
+	
 	public Adulto(Long id, String nombre, LocalDate fechaNacimiento, String dni) {
 		super(id, nombre, fechaNacimiento);
 		setDni(dni);
+	}
+	
+	public Adulto(Persona persona, String dni) {
+		this(persona.getId(), persona.getNombre(), persona.getFechaNacimiento(), dni);
 	}
 	
 	public Adulto(String nombre, LocalDate fechaNacimiento, String dni) {
@@ -20,12 +25,22 @@ public class Adulto extends Persona {
 	}
 
 	public void setDni(String dni) {
-		this.dni = dni;
+		if(dni == null) {
+			throw new RuntimeException("El DNI es obligatorio");
+		}
+		
+		String dniNormalizado = dni.trim().toUpperCase();
+		
+		if(!dniNormalizado.matches("^[XYZ\\d]\\d{7}[A-Z]$")) {
+			throw new RuntimeException("El DNI debe tener el formato correcto");
+		}
+		
+		this.dni = dniNormalizado;
 	}
 	
 	@Override
 	public void setFechaNacimiento(LocalDate fechaNacimiento) {
-		if(fechaNacimiento == null || fechaNacimiento.plusYears(18).isAfter(LocalDate.now())) {
+		if(fechaNacimiento == null || fechaNacimiento.plusYears(MAYORIA_DE_EDAD).isAfter(LocalDate.now())) {
 			throw new RuntimeException("Debes dar la fecha de nacimiento y ser mayor de edad para ser adulto");
 		}
 		

@@ -3,11 +3,12 @@ package com.ipartek.formacion.poo.pruebas;
 import java.time.LocalDate;
 
 import com.ipartek.formacion.poo.pojos.Adulto;
+import com.ipartek.formacion.poo.pojos.Local;
 import com.ipartek.formacion.poo.pojos.Persona;
 
 public class AdultoPrueba {
 	public static void main(String[] args) {
-		Adulto adulto = new Adulto("Uno", LocalDate.of(2000, 1, 2), "12341235");
+		Adulto adulto = new Adulto("Uno", LocalDate.of(2000, 1, 2), "    12341235a      ");
 
 		System.out.println(adulto);
 		
@@ -35,5 +36,19 @@ public class AdultoPrueba {
 		} else {
 			System.out.println("No es adulto");
 		}
+		
+		Local local = new Local(1L, "Ipartek");
+		
+		otraPersona.setFechaNacimiento(LocalDate.of(2000, 2, 1));
+		
+		local.entrar(otraPersona);
+		local.entrar(adulto);
+		
+		Adulto nuevoAdulto = new Adulto(otraPersona, "12345678a");
+		
+		local.salir(otraPersona);
+		local.entrar(nuevoAdulto);
+		
+		local.getPersonas().forEach(p -> System.out.println(p));
 	}
 }

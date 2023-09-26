@@ -65,11 +65,19 @@ public class Local {
 			throw new RuntimeException("Es obligatorio dar un objeto de tipo persona");
 		}
 
-		if (persona.getFechaNacimiento().plusYears(18).isAfter(LocalDate.now())) {
+		if (persona.getFechaNacimiento().plusYears(Adulto.MAYORIA_DE_EDAD).isAfter(LocalDate.now())) {
 			throw new RuntimeException("Debe ser mayor de edad para entrar");
 		}
 
 		personas.add(persona);
+	}
+	
+	public void entrar(Adulto adulto) {
+		if(adulto == null) {
+			throw new RuntimeException("Es obligatorio dar un objeto de tipo persona");
+		}
+		
+		personas.add(adulto);
 	}
 
 	public void salir(Persona persona) {
