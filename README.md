@@ -12,3 +12,10 @@
 ## Expresiones regulares
 
 * https://www.regular-expressions.info/
+
+## Patrones de diseño
+
+* https://refactoring.guru/
+* https://www.oscarblancarteblog.com/
+* https://springframework.guru/gang-of-four-design-patterns/
+
