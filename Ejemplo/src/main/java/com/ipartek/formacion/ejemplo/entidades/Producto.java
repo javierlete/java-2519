@@ -3,6 +3,8 @@ package com.ipartek.formacion.ejemplo.entidades;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,5 +18,6 @@ public class Producto {
 	private Long id;
 	private String nombre;
 	private BigDecimal precio;
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaCaducidad;
 }
