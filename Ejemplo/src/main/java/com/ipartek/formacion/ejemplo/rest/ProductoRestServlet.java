@@ -32,4 +32,14 @@ public class ProductoRestServlet extends HttpServlet {
 
 		mapper.writeValue(out, productos);
 	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		Producto producto = mapper.readValue(request.getInputStream(), Producto.class);
+		
+		Producto productoNuevo = negocio.agregarProducto(producto);
+		
+		mapper.writeValue(response.getOutputStream(), productoNuevo);
+	}
 }
