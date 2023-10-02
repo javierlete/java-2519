@@ -17,6 +17,7 @@ public class ProductoDaoSqlite implements ProductoDao {
 	private static final String USER = null;
 	private static final String PASS = null;
 	private static final String SQL_SELECT = "SELECT id, nombre, precio, fecha_caducidad FROM productos";
+	private static final String SQL_INSERT = "INSERT INTO productos (nombre, precio, fecha_caducidad) VALUES (?,?,?)";
 
 	static {
 		try {
@@ -64,12 +65,24 @@ public class ProductoDaoSqlite implements ProductoDao {
 	}
 
 	@Override
-	public Producto insertar(Producto entidad) {
-		throw new AccesoDatosException("NO IMPLEMENTADO");
+	public Producto insertar(Producto producto) {
+		try (Connection con = obtenerConexion();
+				PreparedStatement pst = con.prepareStatement(SQL_INSERT)) {
+
+			pst.setString(1, producto.getNombre());
+			pst.setBigDecimal(2, producto.getPrecio());
+			pst.setString(3, producto.getFechaCaducidad().toString());
+			
+			pst.executeUpdate();
+			
+			return producto;
+		} catch (SQLException e) {
+			throw new AccesoDatosException("Error al insertar el producto", e);
+		}
 	}
 
 	@Override
-	public Producto modificar(Producto entidad) {
+	public Producto modificar(Producto producto) {
 		throw new AccesoDatosException("NO IMPLEMENTADO");
 	}
 
