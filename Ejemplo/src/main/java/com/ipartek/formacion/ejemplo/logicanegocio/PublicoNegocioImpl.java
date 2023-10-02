@@ -16,4 +16,10 @@ public class PublicoNegocioImpl implements PublicoNegocio {
 		return daoProducto.selectTodos();
 	}
 
+	@Override
+	public Producto agregarProducto(Producto producto) {
+		log.info("Se va a insertar el producto " + producto);
+		return daoProducto.insertar(producto);
+	}
+
 }
