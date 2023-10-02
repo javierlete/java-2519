@@ -71,7 +71,11 @@ public class ProductoDaoSqlite implements ProductoDao {
 
 			pst.setString(1, producto.getNombre());
 			pst.setBigDecimal(2, producto.getPrecio());
-			pst.setString(3, producto.getFechaCaducidad().toString());
+			
+			LocalDate fechaCaducidad = producto.getFechaCaducidad();
+			String fechaCaducidadString = fechaCaducidad == null ? null : fechaCaducidad.toString(); 
+			
+			pst.setString(3, fechaCaducidadString);
 			
 			pst.executeUpdate();
 			
