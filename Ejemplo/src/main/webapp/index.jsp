@@ -9,6 +9,13 @@
 </head>
 <body>
 
+<form action="agregar" method="post">
+	<input name="nombre" placeholder="Nombre">
+	<input name="precio" type="number" step=".01" min="0" placeholder="Precio">
+	<input name="fecha-caducidad" type="date">
+	<button>Guardar producto</button>
+</form>
+
 <ul>
 	<c:forEach items="${productos}" var="p">
 		<li>${p.id}: ${p.nombre} -> ${p.precio} € 
