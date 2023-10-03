@@ -33,16 +33,18 @@ public class AgregarServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Recopilar información de la petición
+		String idString = request.getParameter("id"); 
 		String nombre = request.getParameter("nombre");
 		String precioString = request.getParameter("precio");
 		String fechaCaducidadString = request.getParameter("fecha-caducidad");
 
 		// Convertimos la información
+		Long id = idString != null && idString.trim().length() != 0 ? Long.parseLong(idString) : null;
 		BigDecimal precio = precioString.trim().length() == 0 ? null : new BigDecimal(precioString);
 		LocalDate fechaCaducidad = fechaCaducidadString.isBlank() ? null : LocalDate.parse(fechaCaducidadString);
 
 		// Empaquetamos la información en un objeto del modelo (en nuestro caso entidad)
-		Producto producto = Producto.builder().nombre(nombre).precio(precio).fechaCaducidad(fechaCaducidad).build();
+		Producto producto = Producto.builder().id(id).nombre(nombre).precio(precio).fechaCaducidad(fechaCaducidad).build();
 
 		// Validar el modelo
 		Set<ConstraintViolation<Producto>> constraintViolations = validator.validate(producto);
@@ -60,7 +62,6 @@ public class AgregarServlet extends HttpServlet {
 			errores.put(propiedad, mensaje);
 		}
 
-		// Llamamos a la lógica de negocio
 		if (errores.size() > 0) {
 			// Empaquetamos información para la siguiente vista
 			request.setAttribute("errores", errores);
@@ -69,7 +70,12 @@ public class AgregarServlet extends HttpServlet {
 			request.getRequestDispatcher("listado").forward(request, response);
 		} else {
 			// Llamamos a la lógica de negocio
-			negocio.agregarProducto(producto);
+			if(id == null) {
+				negocio.agregarProducto(producto);
+			} else {
+				negocio.modificarProducto(producto);
+			}
+			
 			// Pasamos a la siguiente vista
 			response.sendRedirect("listado");
 		}

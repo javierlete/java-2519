@@ -12,31 +12,25 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/listado")
-public class ListadoServlet extends HttpServlet {
+@WebServlet("/buscarnombre")
+public class BuscarNombreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+
 	private PublicoNegocio negocio = new PublicoNegocioImpl();
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String idString= request.getParameter("id");
-		
-		if(idString != null) {
-			Long id = Long.parseLong(idString);
-			Producto producto = negocio.obtenerProductoPorId(id);
-			
-			if(producto != null) {
-				request.setAttribute("producto", producto);
-			}
-		}
-		
-		Iterable<Producto> productos = negocio.obtenerProductos();
-		
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String nombre = request.getParameter("nombre");
+
+		Iterable<Producto> productos = negocio.obtenerProductosPorNombre(nombre);
+
 		request.setAttribute("productos", productos);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 }
